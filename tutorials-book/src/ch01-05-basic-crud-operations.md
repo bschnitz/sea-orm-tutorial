@@ -53,7 +53,7 @@ We can perform the update as follows:
 
 ```rust, no_run
 let sad_bakery = bakery::ActiveModel {
-    id: ActiveValue::Set(res.last_insert_id),
+    id: ActiveValue::Set(res.id),
     name: ActiveValue::Set("Sad Bakery".to_owned()),
     profit_margin: ActiveValue::NotSet,
 };
@@ -65,7 +65,7 @@ Let's welcome John, the first employee of _Sad Bakery_!
 ```rust, no_run
 let john = chef::ActiveModel {
     name: ActiveValue::Set("John".to_owned()),
-    bakery_id: ActiveValue::Set(res.last_insert_id), // a foreign key
+    bakery_id: ActiveValue::Set(res.id), // a foreign key
     ..Default::default()
 };
 Chef::insert(john).exec(db).await?;
